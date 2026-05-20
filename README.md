@@ -12,7 +12,7 @@ This project implements a robust ETL (Extract, Transform, Load) pipeline designe
 
 The data engineering architecture is centered around an Apache Spark-based ETL pipeline. Raw data from various sources (CSV files) is ingested and processed in a distributed manner. The processed data is then structured and prepared for analytical consumption. For larger datasets, the architecture suggests leveraging AWS S3 for data storage and Amazon Redshift for data warehousing, enabling scalable and performant analytics.
 
-![ETL Pipeline Architecture](etl_pipeline_architecture.png)
+![ETL Pipeline Architecture](https://github.com/ShireenTalaat/US-Immigration-Data-Engineering/blob/023a1374a5c2cadb6750bf9420ce6aaa66c330e9/USimmg.jpg)
 
 ## Technologies Used
 
