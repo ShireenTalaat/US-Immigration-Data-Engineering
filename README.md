@@ -1,49 +1,49 @@
-## Uadcity-Capstone
-# Data Engineering Capstone Project 
+# US Immigration Data Engineering Project
 
-Udacity provided four datasets to be explored through this project. The main dataset will include data on immigration to the United States, 
-and supplementary datasets will include data on airport codes, U.S. city demographics, and temperature data.
+## Business Problem
 
-The goal of this project is to create an ETL pipeline using using these datasets. 
+Analyzing immigration patterns and their correlations with various demographic, geographic, and environmental factors is crucial for policy-making, resource allocation, and understanding societal shifts. This project addresses the challenge of integrating and processing diverse, large-scale datasets related to US immigration to derive meaningful insights and support data-driven decisions.
 
+## Solution Overview
 
-### Instructions
-THIS project is broken down into a series of steps.
+This project implements a robust ETL (Extract, Transform, Load) pipeline designed to process and integrate multiple datasets, including US immigration records, airport codes, city demographics, and temperature data. Utilizing Apache Spark, the pipeline efficiently handles large volumes of data, performs necessary cleaning and transformations, and models the data into a structured format suitable for analytical queries. The solution emphasizes scalability, data quality, and the ability to support comprehensive analysis of immigration trends.
 
-#### Step 1: Scope the Project and Gather Data
-Since the scope of the project will be highly dependent on the data, these two things happen simultaneously.
-In this step, data will be identified and gathered.
+## Architecture
 
-#### Step 2: Explore and Assess the Data
-Explore the data to identify data quality issues, like missing values, duplicate data, etc.
-Document steps necessary to clean the data
+The data engineering architecture is centered around an Apache Spark-based ETL pipeline. Raw data from various sources (CSV files) is ingested and processed in a distributed manner. The processed data is then structured and prepared for analytical consumption. For larger datasets, the architecture suggests leveraging AWS S3 for data storage and Amazon Redshift for data warehousing, enabling scalable and performant analytics.
 
-#### Step 3: Define the Data Model
-Map out the conceptual data model with model explanation. 
-List the steps necessary to pipeline the data into the chosen data model
-![diagrame](Diagram.png)
+![ETL Pipeline Architecture](etl_pipeline_architecture.png)
 
+## Technologies Used
 
-#### Step 4: Run ETL to Model the Data
-- Create the data pipelines and the data model
-- Include a data dictionary
-- Run data quality checks to ensure the pipeline ran as expected
-- Integrity constraints on the relational database (e.g., unique key, data type, etc.)
-- Unit tests for the scripts to ensure they are doing the right thing
-- Source/count checks to ensure completeness
+-   **Big Data Processing:** Apache Spark, Spark SQL
+-   **Programming Language:** Python
+-   **Data Storage:** CSV files (local), AWS S3 (proposed for larger scale)
+-   **Data Warehousing:** Amazon Redshift (proposed for larger scale)
+-   **Orchestration (Proposed):** Apache Airflow (for daily dashboard updates)
 
-#### Step 5: Complete Project Write Up
-What's the goal?
-The goal is to check the flow of immigrants to the US using airport data, temperature data, demographic data, and a huge dataset from the US National Tourism and Trade Office. 
+## Data Pipeline / Workflow
 
-How often the data should be updated and why?
-The data should be updated monthly in conjunction with the current raw file format.
+The ETL pipeline involves several key stages:
 
-Spark was chosen since it can easily handle multiple file formats (including SAS) containing large amounts of data. Spark SQL was chosen to process the large input files into dataframes and manipulated via standard SQL join operations to form additional tables.
+1.  **Data Ingestion:** Raw data from various sources (immigration data, airport codes, city demographics, temperature data) is ingested into the system.
+2.  **Data Cleaning & Transformation:** Spark is used to perform data quality checks, handle missing values, remove duplicates, and transform data into a consistent schema. This includes joining disparate datasets based on common keys.
+3.  **Data Modeling:** The cleaned and transformed data is modeled into a star or snowflake schema, optimizing it for analytical queries. This involves creating fact and dimension tables.
+4.  **Data Loading:** The structured data is loaded into analytical stores (e.g., local files, or Amazon Redshift for a production-grade solution).
+5.  **Data Quality Checks:** Post-load checks are performed to ensure data integrity, completeness, and accuracy, including integrity constraints and source/count validations.
 
-If the data needs to populate a dashboard daily to meet an SLA then we could use a scheduling tool such as Airflow to run the ETL pipeline overnight.
+## Key Features
 
-If I had 100x times the size of the processed files I would load the data into AWS S3, then use spark to do EDA, load it back to S3 and finally ETL into Redshift.
+-   **Scalable ETL:** Leverages Apache Spark for distributed processing of large datasets.
+-   **Comprehensive Data Integration:** Combines diverse data sources to provide a holistic view of immigration patterns.
+-   **Data Quality Assurance:** Incorporates robust data cleaning and validation steps.
+-   **Analytical Readiness:** Delivers structured data optimized for business intelligence and reporting.
+-   **Future-Proof Design:** Designed with considerations for scaling to petabytes of data using cloud services like AWS S3 and Redshift.
 
-Redshift is a good fit if 100 persons would need to access the data, it should be able to handle this with no problem. We could increase the specs of our cluster if it was not fast enough to serve everyone.
+## Results & Impact
 
+This project successfully demonstrates the ability to build a scalable data engineering solution for complex analytical problems. The resulting structured dataset enables in-depth analysis of US immigration trends, allowing for the identification of key factors influencing immigration and their demographic, geographic, and environmental correlations. This provides a foundation for data-driven policy recommendations and strategic planning.
+
+## Future Improvements
+
+Future enhancements include deploying the ETL pipeline on a cloud-based Spark cluster (e.g., AWS EMR or Azure Databricks) for improved performance and manageability. Implementing Apache Airflow would enable automated scheduling and monitoring of the ETL jobs, ensuring timely data updates. Further development could involve integrating machine learning models to predict immigration flows or identify causal relationships between various factors.
